@@ -15,7 +15,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/grayscale.jpg "Grayscale"
+[image1]: ./test_images_output/solidYellowCurve2.jpg "solidYellowCurve2"
 
 ---
 
@@ -23,25 +23,25 @@ The goals / steps of this project are the following:
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
+I've written the pipeline in a separate function so i could apply it on images and video's. This helped me to debug on images and then apply it on video's.
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
+Initially my pipeline consisted on 5 steps: 
+* grayscale (convert image to grayscale)
+* blurring (blur the image, for better edge detection)
+* canny (detect edges)
+* roi (crop edges to the region of interest)
+* hough (transform edges to lines)
 
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
+After this worked i've improved the script by adding:
+* split lines (split the lines into left and right bins)
+* average lines (average mulitple lines into a single line )
 
 ![alt text][image1]
 
-
 ### 2. Identify potential shortcomings with your current pipeline
 
-
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
-
+I've applied my script on the challenge code and saw that sometimes that averaging line resulted in an error. I noticed that splitting the lines into their (left, right) bins resulted in potentially empy bins. 
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
-
-Another potential improvement could be to ...
+a possible sollution could be to "remember" the averaged lines from the previous frame (in a video), so when a bin is empty, it's likely that the lines from the previous frame would fit reasonbly well.
